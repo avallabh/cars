@@ -15,7 +15,7 @@ So that I can list it in my lost
 # Upon successfully creating a car, I am redirected so that I can create another car.
 
   scenario 'specify color,  year, mileage of car' do
-    visit new_car_path
+    visit '/cars/new'
     fill_in "Color", with: 'Red'
     fill_in "Year", with: 2001
     fill_in "Mileage", with: 12345
