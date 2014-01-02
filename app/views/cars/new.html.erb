@@ -1,0 +1,12 @@
+<h1>Add a Car</h1>
+
+<%= simple_form_for(@car) do |f| %>
+  <%= f.input :color %>
+  <%= f.input :year %>
+  <%= f.input :mileage %>
+  <%= f.input :description %>
+  <br>
+  <%= f.button :submit, 'Save Car' %>
+<% end %>
+<br>
+<%= link_to 'Back to Home', cars_path %>
