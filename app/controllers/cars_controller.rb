@@ -15,7 +15,8 @@ class CarsController < ApplicationController
   def create
     @car = Car.new(car_params)
     if @car.save
-      redirect_to @car, notice: 'Car was successfully added.'
+      #render 'index', notice: 'Car was successfully added.'
+      redirect_to '/cars', notice: 'Car was successfully added.'
     else
       render 'new'
     end
