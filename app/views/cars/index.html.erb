@@ -1,1 +1,25 @@
 <h1>Listing of All Cars</h1>
+
+<table>
+
+  <thead>
+    <tr>
+      <th>Color</th>
+      <th>Year</th>
+      <th>Mileage</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <% @cars.each do |car| %>
+        <tr>
+          <td><%= car.name %></td>
+          <td><%= car.year %></td>
+          <td><%= car.mileage %></td>
+          <td><%= car.description %></td>
+          <td><%= link_to 'Show', car %></td>
+        </tr>
+      <% end %>
+  </tbody>
+</table>
