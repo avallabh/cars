@@ -30,4 +30,31 @@ So that I can list it in my lost
     expect(page).to have_content(mileage)
   end
 
+  scenario 'should allow creation if year >= 1980' do
+    test = FactoryGirl.create(:car, year: 1990)
+
+    visit '/cars/new'
+    fill_in "Color", with: test.color
+    fill_in "Year", with: test.year
+    fill_in "Mileage", with: test.mileage
+    click_on "Save Car"
+
+    expect(page).to have_content(test.year)
+    expect(page).to have_content('Car was successfully added.')
+    expect(Car.count).to eq(2) # 1 object created in each scenario
+  end
+
+  scenario 'should not allow creation if year < 1980' do
+    test = FactoryGirl.create(:car, year: 1979)
+
+    visit '/cars/new'
+    fill_in "Color", with: test.color
+    fill_in "Year", with: test.year
+    fill_in "Mileage", with: test.mileage
+    click_on "Save Car"
+
+    expect(page).to_not have_content(test.year)
+    expect(page).to_not have_content('Car was successfully added.')
+  end
+
 end
