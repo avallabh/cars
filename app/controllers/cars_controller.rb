@@ -13,7 +13,7 @@ class CarsController < ApplicationController
   end
 
   def create
-    @car = Car.new(car_params)
+    @car = Car.new(params.require(:car).permit(:color, :year, :mileage, :description))
     if @car.save
       #render 'index', notice: 'Car was successfully added.'
       redirect_to '/cars', notice: 'Car was successfully added.'
@@ -22,8 +22,4 @@ class CarsController < ApplicationController
     end
   end
 
-  private
-  def car_params
-    params.require(:car).permit(:color, :year, :mileage, :description)
-  end
 end
