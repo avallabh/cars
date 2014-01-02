@@ -15,22 +15,11 @@ So that I can list it in my lost
 # Upon successfully creating a car, I am redirected so that I can create another car.
 
   scenario 'specify color,  year, mileage of car' do
-<<<<<<< HEAD
+
     visit '/cars/new'
     fill_in "Color", with: 'Red'
     fill_in "Year", with: 2001
     fill_in "Mileage", with: 12345
-    click_on "Create Car"
-=======
-    color = 'Red'
-    year = 2001
-    mileage = 12345
->>>>>>> add-car-attributes
-
-    visit '/cars/new'
-    fill_in "Color", with: color
-    fill_in "Year", with: year
-    fill_in "Mileage", with: mileage
     click_on "Save Car"
 
     expect(page).to have_content(color)
