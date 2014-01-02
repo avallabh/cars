@@ -15,19 +15,17 @@ So that I can list it in my lost
 # Upon successfully creating a car, I am redirected so that I can create another car.
 
   scenario 'specify color,  year, mileage of car' do
-    color = 'Red'
-    year = 2001
-    mileage = 12345
+    test = FactoryGirl.create(:car)
 
     visit '/cars/new'
-    fill_in "Color", with: color
-    fill_in "Year", with: year
-    fill_in "Mileage", with: mileage
+    fill_in "Color", with: test.color
+    fill_in "Year", with: test.year
+    fill_in "Mileage", with: test.mileage
     click_on "Save Car"
 
-    expect(page).to have_content(color)
-    expect(page).to have_content(year)
-    expect(page).to have_content(mileage)
+    expect(page).to have_content(test.color)
+    expect(page).to have_content(test.year)
+    expect(page).to have_content(test.mileage)
   end
 
   scenario 'should allow creation if year >= 1980' do
@@ -45,15 +43,17 @@ So that I can list it in my lost
   end
 
   scenario 'should not allow creation if year < 1980' do
-    test = FactoryGirl.create(:car, year: 1979)
+    color = 'Red'
+    year = 1979
+    mileage = 12345
 
     visit '/cars/new'
-    fill_in "Color", with: test.color
-    fill_in "Year", with: test.year
-    fill_in "Mileage", with: test.mileage
+    fill_in "Color", with: color
+    fill_in "Year", with: year
+    fill_in "Mileage", with: mileage
     click_on "Save Car"
 
-    expect(page).to_not have_content(test.year)
+    expect(page).to have_content('must be greater than or equal to 1980')
     expect(page).to_not have_content('Car was successfully added.')
   end
 
